@@ -103,3 +103,21 @@ modify([[1, X]|T], [X|Y]) :- modify(T, Y).
 modify([[N, X]|T], [[N, X]|Y]) :- 
     N > 1,
     modify(T, Y).
+
+
+% P12 - Decode a run-length encoded list 
+
+generate(0, _, []) :- !.
+generate(N, X, [X|T]) :-
+    N > 0,
+    Nprev is N - 1,
+    generate(Nprev, X, T).
+
+decode([], []).
+decode([[N, X]|T], R) :-
+    generate(N, X, L),
+    decode(T, TD),
+    append(L, TD, R).
+decode([X|T], [X|TD]) :-
+    X \= [_, _],
+    decode(T, TD).
