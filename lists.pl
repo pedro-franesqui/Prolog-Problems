@@ -121,3 +121,17 @@ decode([[N, X]|T], R) :-
 decode([X|T], [X|TD]) :-
     X \= [_, _],
     decode(T, TD).
+
+
+% P13 - Run-length encoding of a list (direct solution)
+
+
+% P14 - Duplicate elements of a list
+
+dupli(_, 0, []).
+dupli([], _, []).
+dupli([H|T], N, L) :-
+    N >= 1,
+    generate(N, H, L1),
+    dupli(T, N, L2),
+    append(L1, L2, L).
