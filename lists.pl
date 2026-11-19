@@ -128,6 +128,12 @@ decode([X|T], [X|TD]) :-
 
 % P14 - Duplicate elements of a list
 
+dupli([], []).
+dupli([H|T], [H, H|T_]) :- dupli(T, T_).
+
+
+% P15 - Duplicate elements of a list given nummber of times
+
 dupli(_, 0, []).
 dupli([], _, []).
 dupli([H|T], N, L) :-
@@ -135,3 +141,4 @@ dupli([H|T], N, L) :-
     generate(N, H, L1),
     dupli(T, N, L2),
     append(L1, L2, L).
+
